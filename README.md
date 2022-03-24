@@ -1,2 +1,2 @@
-# react-community
-리액트 커뮤니티 by team.비빔밥🍚
+# react-lotto
+리액트 로또 by team.비빔밥🍚
