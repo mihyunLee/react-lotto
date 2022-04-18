@@ -22,6 +22,7 @@
 
 ## 메인 화면 스케치
 - 2022.04.18
+
 ![image](https://user-images.githubusercontent.com/51310674/163814393-62c25fb5-b37e-432c-af7c-2267128464b9.png)
 
 
