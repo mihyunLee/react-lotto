@@ -21,8 +21,10 @@
 - [ ] 추첨 결과와 비교해서 몇개 맞았는지 보여주는 기능
 
 ## 메인 화면 스케치
-- 2022.04.20
-![image](https://user-images.githubusercontent.com/51310674/164243415-810d9978-4ca9-4adf-a45a-8638b7885160.png)
+- 2022.04.25
+![image](https://user-images.githubusercontent.com/51310674/165100991-405ca97e-05f0-4720-b17a-cd4b4c99dde9.png)
+![image](https://user-images.githubusercontent.com/51310674/165101049-a2b96574-8421-40b9-a68c-c33082b2ef27.png)
+
 
 
 ## 환경
