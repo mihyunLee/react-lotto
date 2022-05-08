@@ -1,12 +1,11 @@
 import './App.css';
-import LottoNumberList from './components/LottoNumberItems/LottoNumberList';
+import LeftPage from "./pages/LeftPage";
 
 function App() {
   return (
-    <div className=''>
-      <LottoNumberList/>
-      {/* hello */}
-    </div>
+    <>
+      <LeftPage />
+    </>
   );
 }
 
