@@ -1,13 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import ReactModal from "react-modal";
+
 import "./index.css";
 import App from "./App";
+
 import GlobalStyle from "./globalStyle";
+import ModalsProvider from "./components/Modals/ModalsProvider";
+
+ReactModal.setAppElement("#root");
 
 ReactDOM.render(
   <React.StrictMode>
-    <GlobalStyle />
-    <App />
+    <ModalsProvider>
+      <GlobalStyle />
+      <App />
+    </ModalsProvider>
   </React.StrictMode>,
   document.getElementById("root")
 );
