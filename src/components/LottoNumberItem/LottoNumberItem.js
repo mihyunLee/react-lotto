@@ -1,8 +1,23 @@
-import React from 'react'
+import React, {useState} from 'react'
 import Button from '@mui/material/Button'
 
-export default function LottoNumberItem({LottoNumber}) {
+export default function LottoNumberItem({LottoNumber, lottoData}) {
+  const [color, setColor] = useState('success')
+
+  function changeButtonColor(LottoNumber){
+    const colorValue = color === 'error' ? 'success' : 'error'
+    if (lottoData({'LottoNumber' : LottoNumber, 'color': colorValue})){
+      setColor(colorValue)
+    }
+  }
   return (
-    <Button variant="outlined">{LottoNumber}</Button>
+    <>
+      <Button sx={{m:0.5, p:0.1, maxWidth: '100%'}}
+              onClick={() => changeButtonColor(LottoNumber)}
+              variant="contained"
+              color={color}>
+        {LottoNumber}
+      </Button>
+    </>
   )
 }
