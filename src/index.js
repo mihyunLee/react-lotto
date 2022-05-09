@@ -6,7 +6,7 @@ import "./index.css";
 import App from "./App";
 
 import GlobalStyle from "./globalStyle";
-import ModalsProvider from "./components/Modals/ModalsProvider";
+import ModalsProvider from "./Modals/ModalsProvider";
 
 ReactModal.setAppElement("#root");
 

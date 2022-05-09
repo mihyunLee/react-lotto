@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { ModalsDispatchContext, ModalsStateContext } from "./ModalsContext";
-import ChargeModal from "./ChargeModal";
+import ChargeModal from "../components/MoneyChargeModal";
 
 // 모달 컴포넌트 매핑
 export const modals = {
