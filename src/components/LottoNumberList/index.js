@@ -1,30 +1,47 @@
+import { useState } from "react";
+
+import { LottoNumberControl } from "../LottoNumberControl";
 import { LottoNumberItem } from "../LottoNumberItem";
 
-export const LottoNumberList = ({ reset }) => {
-  const lottoMaxCount = 6;
-  let lottoData = [];
-  const lottoDataCheck = ({ LottoNumber, color }) => {
-    if (color === "success") {
-      lottoData = lottoData.filter((item) => {
-        return item !== LottoNumber;
-      });
-    } else {
-      if (lottoData.length >= lottoMaxCount) {
-        alert("최대 6개까지 선택 가능합니다.");
-        return false;
-      }
-      lottoData.push(LottoNumber);
-    }
-    return true;
+export const LottoNumberList = ({ onSelect }) => {
+  const LOTTO_MAX_COUNT = 6;
+
+  const [selectedNumbers, setSelectedNumbers] = useState([]);
+
+  const saveNumbers = (newNum) => {
+    setSelectedNumbers([...selectedNumbers, newNum]);
   };
 
-  const LottoItems = Array.from(new Array(45), (x, i) => (
+  const deleteNumbers = (newNum) => {
+    const newNumbers = selectedNumbers.filter((item) => item !== newNum);
+    setSelectedNumbers(newNumbers);
+  };
+
+  // 로직 적용하기
+  const checkLottoData = () => {
+    if (selectedNumbers.length >= LOTTO_MAX_COUNT) {
+      alert("최대 6개까지 선택 가능합니다.");
+      return;
+    }
+  };
+
+  const LottoItems = Array.from(new Array(45), (v, i) => (
     <LottoNumberItem
       key={i + 1}
-      LottoNumber={i + 1}
-      lottoData={lottoDataCheck}
+      lottoNumber={i + 1}
+      saveNumbers={saveNumbers}
+      deleteNumbers={deleteNumbers}
+      checkLottoData={checkLottoData}
     />
   ));
 
-  return <>{LottoItems}</>;
+  return (
+    <>
+      {LottoItems}
+      <LottoNumberControl
+        selectedNumbers={selectedNumbers}
+        onSelect={onSelect}
+      />
+    </>
+  );
 };

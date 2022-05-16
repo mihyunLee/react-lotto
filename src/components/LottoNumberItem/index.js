@@ -1,24 +1,34 @@
 import { useState } from "react";
 import Button from "@mui/material/Button";
 
-export const LottoNumberItem = ({ LottoNumber, lottoData }) => {
+export const LottoNumberItem = ({
+  deleteNumbers,
+  saveNumbers,
+  lottoNumber,
+}) => {
   const [color, setColor] = useState("success");
+  const [isClicked, setIsClicked] = useState(true);
 
-  function changeButtonColor(LottoNumber) {
-    const colorValue = color === "error" ? "success" : "error";
-    if (lottoData({ LottoNumber: LottoNumber, color: colorValue })) {
-      setColor(colorValue);
+  const clickNumber = (e) => {
+    setIsClicked(!isClicked);
+    if (isClicked) {
+      setColor("error");
+      saveNumbers(Number(e.target.innerText));
+    } else {
+      setColor("success");
+      deleteNumbers(Number(e.target.innerText));
     }
-  }
+  };
+
   return (
     <>
       <Button
         sx={{ m: 0.5, p: 0.1, maxWidth: "100%" }}
-        onClick={() => changeButtonColor(LottoNumber)}
+        onClick={clickNumber}
         variant="contained"
         color={color}
       >
-        {LottoNumber}
+        {lottoNumber}
       </Button>
     </>
   );

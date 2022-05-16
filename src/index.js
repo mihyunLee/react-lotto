@@ -11,11 +11,9 @@ import ModalsProvider from "./Modals/ModalsProvider";
 ReactModal.setAppElement("#root");
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ModalsProvider>
-      <GlobalStyle />
-      <App />
-    </ModalsProvider>
-  </React.StrictMode>,
+  <ModalsProvider>
+    <GlobalStyle />
+    <App />
+  </ModalsProvider>,
   document.getElementById("root")
 );
