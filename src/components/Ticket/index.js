@@ -1,4 +1,14 @@
-export const Ticket = ({ name, isAutoSelect, selectedNumbers }) => {
+export const Ticket = ({
+  onRemove,
+  id,
+  name,
+  isAutoSelect,
+  selectedNumbers,
+}) => {
+  const handleRemove = () => {
+    onRemove(id);
+  };
+
   return (
     <div>
       <span>
@@ -13,7 +23,7 @@ export const Ticket = ({ name, isAutoSelect, selectedNumbers }) => {
             ))}
         </ul>
       </div>
-      <button>삭제</button>
+      <button onClick={handleRemove}>삭제</button>
     </div>
   );
 };

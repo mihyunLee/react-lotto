@@ -1,8 +1,8 @@
 import { Ticket } from "../Ticket";
 
-export const SelectView = ({ numberSelectList }) => {
+export const SelectView = ({ onReset, onRemove, numberSelectList }) => {
   const clickResetBtn = () => {
-    console.log("초기화 버튼 클릭!");
+    onReset();
   };
 
   return (
@@ -12,6 +12,7 @@ export const SelectView = ({ numberSelectList }) => {
       <div>
         {numberSelectList.map((item) => (
           <Ticket
+            onRemove={onRemove}
             key={item.id}
             isAutoSelect={item.isAutoSelect}
             name={item.id}
