@@ -2,7 +2,7 @@ import { useState } from "react";
 import Button from "@mui/material/Button";
 
 export const LottoNumberItem = ({
-  deleteNumbers,
+  removeNumbers,
   saveNumbers,
   selectedNumbers,
   lottoNumber,
@@ -16,7 +16,7 @@ export const LottoNumberItem = ({
     if (selectedNumbers.length >= LOTTO_MAX_COUNT && isClicked) {
       alert("최대 6개까지 선택가능합니다.");
       setColor("success");
-      deleteNumbers(Number(e.target.innerText));
+      removeNumbers(Number(e.target.innerText));
       return;
     }
 
@@ -26,7 +26,7 @@ export const LottoNumberItem = ({
       saveNumbers(Number(e.target.innerText));
       setColor("error");
     } else {
-      deleteNumbers(Number(e.target.innerText));
+      removeNumbers(Number(e.target.innerText));
       setColor("success");
     }
   };

@@ -10,7 +10,7 @@ export const LottoNumberList = ({ onSelect }) => {
     setSelectedNumbers([...selectedNumbers, newNum]);
   };
 
-  const deleteNumbers = (newNum) => {
+  const removeNumbers = (newNum) => {
     const newNumbers = selectedNumbers.filter((item) => item !== newNum);
     setSelectedNumbers(newNumbers);
   };
@@ -20,7 +20,7 @@ export const LottoNumberList = ({ onSelect }) => {
       key={i + 1}
       lottoNumber={i + 1}
       saveNumbers={saveNumbers}
-      deleteNumbers={deleteNumbers}
+      removeNumbers={removeNumbers}
       selectedNumbers={selectedNumbers}
     />
   ));
