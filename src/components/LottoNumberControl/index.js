@@ -2,9 +2,13 @@ import Button from "@mui/material/Button";
 import { Grid } from "@mui/material";
 
 export const LottoNumberControl = ({ selectedNumbers, onSelect }) => {
+  const LOTTO_MAX_COUNT = 6;
+
   const handleSubmit = () => {
-    alert("저장 성공");
-    onSelect(false, selectedNumbers);
+    if (selectedNumbers.length === LOTTO_MAX_COUNT) {
+      onSelect(false, selectedNumbers);
+      return;
+    }
   };
 
   return (
