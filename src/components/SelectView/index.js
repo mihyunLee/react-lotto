@@ -1,15 +1,17 @@
 import { Ticket } from "../Ticket";
 
+import "./style.css";
+
 export const SelectView = ({ onReset, onRemove, numberSelectList }) => {
   const clickResetBtn = () => {
     onReset();
   };
 
   return (
-    <div>
+    <div className="SelectView">
       <span>선택번호 확인</span>
       <button onClick={clickResetBtn}>초기화</button>
-      <div>
+      <div className="SelectList">
         {numberSelectList.map((item) => (
           <Ticket
             onRemove={onRemove}

@@ -1,5 +1,14 @@
 import { useState } from "react";
+
 import Button from "@mui/material/Button";
+import styled from "styled-components";
+import "./style.css";
+
+const NumButton = styled(Button)`
+  && {
+    font-size: 1.1rem;
+  }
+`;
 
 export const LottoNumberItem = ({
   removeNumbers,
@@ -32,15 +41,16 @@ export const LottoNumberItem = ({
   };
 
   return (
-    <>
-      <Button
-        sx={{ m: 0.5, p: 0.1, maxWidth: "100%" }}
+    <div className="NumberItem">
+      <NumButton
+        size="large"
+        sx={{ m: 1 }}
         onClick={clickNumber}
         variant="contained"
         color={color}
       >
         {lottoNumber}
-      </Button>
-    </>
+      </NumButton>
+    </div>
   );
 };

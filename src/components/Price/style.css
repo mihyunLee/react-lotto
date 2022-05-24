@@ -1,0 +1,6 @@
+.Price {
+}
+
+.Price > span:nth-child(2) {
+  display: block;
+}

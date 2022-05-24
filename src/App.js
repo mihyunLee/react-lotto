@@ -38,11 +38,8 @@ function App() {
 
   return (
     <div className="App">
-      <h1>React Lotto</h1>
-      <div>
-        <LottoNumberList onSelect={onSelect} />
-      </div>
-      <div>
+      <LottoNumberList onSelect={onSelect} />
+      <div className="Wrapper">
         <SelectView
           numberSelectList={lottoData}
           onReset={onReset}

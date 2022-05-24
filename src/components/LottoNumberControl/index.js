@@ -1,6 +1,16 @@
 import Button from "@mui/material/Button";
 import { Grid } from "@mui/material";
 
+import styled from "styled-components";
+import "./style.css";
+
+const ControllBtn = styled(Button)`
+  && {
+    min-width: 100%;
+    font-size: 1rem;
+  }
+`;
+
 export const LottoNumberControl = ({ selectedNumbers, onSelect }) => {
   const LOTTO_MAX_COUNT = 6;
 
@@ -12,24 +22,24 @@ export const LottoNumberControl = ({ selectedNumbers, onSelect }) => {
   };
 
   return (
-    <>
+    <div className="Controller">
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <Button sx={{ mr: 2 }} variant="contained">
+          <ControllBtn sx={{ mr: 2 }} variant="contained">
             초기화
-          </Button>
+          </ControllBtn>
         </Grid>
         <Grid item xs={6}>
-          <Button xs={6} variant="contained">
+          <ControllBtn xs={6} variant="contained">
             자동선택
-          </Button>
+          </ControllBtn>
         </Grid>
         <Grid item xs={12}>
-          <Button variant="contained" onClick={handleSubmit}>
+          <ControllBtn variant="contained" onClick={handleSubmit}>
             확인
-          </Button>
+          </ControllBtn>
         </Grid>
       </Grid>
-    </>
+    </div>
   );
 };

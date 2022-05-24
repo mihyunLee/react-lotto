@@ -2,6 +2,8 @@ import { useState } from "react";
 import useModals from "../../hooks/useModal";
 import Modals, { modals } from "../../Modals/Modals";
 
+import "./style.css";
+
 export const UserCash = () => {
   const { openModal } = useModals();
 
@@ -17,7 +19,7 @@ export const UserCash = () => {
   };
 
   return (
-    <div>
+    <div className="UserCash">
       <span>보유 예치금</span>
       <button onClick={clickCharge}>충전</button>
       <Modals setAmount={setAmount} />

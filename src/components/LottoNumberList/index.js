@@ -3,6 +3,8 @@ import { useState } from "react";
 import { LottoNumberControl } from "../LottoNumberControl";
 import { LottoNumberItem } from "../LottoNumberItem";
 
+import "./style.css";
+
 export const LottoNumberList = ({ onSelect }) => {
   const [selectedNumbers, setSelectedNumbers] = useState([]);
 
@@ -26,12 +28,12 @@ export const LottoNumberList = ({ onSelect }) => {
   ));
 
   return (
-    <>
-      {LottoItems}
+    <div className="LottoNumberList">
+      <div className="LottoNumber">{LottoItems}</div>
       <LottoNumberControl
         selectedNumbers={selectedNumbers}
         onSelect={onSelect}
       />
-    </>
+    </div>
   );
 };

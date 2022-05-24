@@ -1,3 +1,5 @@
+import "./style.css";
+
 export const Ticket = ({
   onRemove,
   id,
@@ -10,7 +12,7 @@ export const Ticket = ({
   };
 
   return (
-    <div>
+    <div className="Ticket">
       <span>
         {name + 1} {isAutoSelect ? "자동" : "수동"}
       </span>
