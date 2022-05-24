@@ -11,7 +11,7 @@ const ControllBtn = styled(Button)`
   }
 `;
 
-export const LottoNumberControl = ({ selectedNumbers, onSelect }) => {
+export const LottoNumberControl = ({ selectedNumbers, onSelect, onReset }) => {
   const LOTTO_MAX_COUNT = 6;
 
   const handleSubmit = () => {
@@ -25,7 +25,7 @@ export const LottoNumberControl = ({ selectedNumbers, onSelect }) => {
     <div className="Controller">
       <Grid container spacing={3}>
         <Grid item xs={6}>
-          <ControllBtn sx={{ mr: 2 }} variant="contained">
+          <ControllBtn sx={{ mr: 2 }} variant="contained" onClick={onReset}>
             초기화
           </ControllBtn>
         </Grid>
