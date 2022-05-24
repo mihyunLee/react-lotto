@@ -1,24 +1,31 @@
-import { useState } from "react";
+import "./style.css";
 
-export const Ticket = ({ name }) => {
-  const [numbers, setNumbers] = useState([4, 7, 31, 12, 23, 5]);
-  const delNum = () => {
-    setNumbers((arr) => (arr = []));
+export const Ticket = ({
+  onRemove,
+  id,
+  name,
+  isAutoSelect,
+  selectedNumbers,
+}) => {
+  const handleRemove = () => {
+    onRemove(id);
   };
 
   return (
-    <div>
-      <span>{name} 미지정</span>
+    <div className="Ticket">
+      <span>
+        {name + 1} {isAutoSelect ? "자동" : "수동"}
+      </span>
       <div>
         <ul>
-          {numbers
+          {selectedNumbers
             .sort((a, b) => a - b)
             .map((num) => (
               <li key={num}>{num}</li>
             ))}
         </ul>
       </div>
-      <button onClick={delNum}>삭제</button>
+      <button onClick={handleRemove}>삭제</button>
     </div>
   );
 };

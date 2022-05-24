@@ -1,0 +1,16 @@
+@media (min-width: 650px) {
+  .NumberItem {
+  }
+}
+
+@media (max-width: 650px) {
+  .NumberItem {
+  }
+}
+
+.NumberItem {
+  width: 20%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
