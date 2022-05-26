@@ -5,9 +5,6 @@ import { AccountView } from "./components/AccountView";
 import { SelectView } from "./components/SelectView";
 import { LottoNumberList } from "./components/LottoNumberList";
 
-import { ResultView } from "./components/ResultView";
-import { BrowserRouter, Router, Route, Link } from "react-router-dom";
-
 function App() {
   const MAX_LOTTO_DATA = 5;
 
@@ -40,44 +37,18 @@ function App() {
   };
 
   return (
-      <BrowserRouter>
-        <div className="App">
-          <div className="App">
-            <LottoNumberList onSelect={onSelect} />
-            <div className="Wrapper">
-              <SelectView
-                numberSelectList={lottoData}
-                onReset={onReset}
-                onRemove={onRemove}
-              />
-              <AccountView />
-            </div>
-          </div>
-        </div>
-      </BrowserRouter>
+    <div className="App">
+      <LottoNumberList onSelect={onSelect} />
+      <div className="Wrapper">
+        <SelectView
+          numberSelectList={lottoData}
+          onReset={onReset}
+          onRemove={onRemove}
+        />
+        <AccountView />
+      </div>
+    </div>
   );
 }
 
 export default App;
-
-
-
-
-          {/* <Switch> 라우터 사용 실패!!
-          <Route exact path="/">
-              <LottoNumberList onSelect={onSelect} />
-                <div className="Wrapper">
-                  <SelectView
-                    numberSelectList={lottoData}
-                    onReset={onReset}
-                    onRemove={onRemove}
-                  />
-                  <AccountView />
-                </div>
-          </Route>
-          <Route path="/result" componenet={ResultView} />
-          <Route path="/">Not Found</Route>
-          </Switch> */}
-          {/* <ResultView /> */}
-
-
