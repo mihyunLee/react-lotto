@@ -1,6 +1,8 @@
+import "./App.css";
+
 const App = () => {
   return (
-    <div>
+    <div className="App">
       <h1>App.js</h1>
     </div>
   );
