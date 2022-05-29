@@ -2,8 +2,6 @@ import Button from "./Button";
 import LottoItem from "./LottoItem";
 
 const LottoList = ({ lottoList }) => {
-  console.log(lottoList);
-
   return (
     <div className="LottoList">
       <div className="header">

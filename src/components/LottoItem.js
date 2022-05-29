@@ -4,7 +4,7 @@ const LottoItem = ({ id, isAuto, selectedNumbers }) => {
   return (
     <div className="LottoItem">
       <div className="tag">
-        <span>{id}</span>
+        <span>{id + 1}</span>
         <span>{isAuto ? "자동" : "수동"}</span>
       </div>
       <div className="content">

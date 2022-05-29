@@ -3,25 +3,45 @@ import Button from "./Button";
 
 const list = [...Array(45).keys()].map((x) => ({ id: x + 1 }));
 
-const Selector = () => {
+const Selector = ({ onSubmit }) => {
   const LOTTO_MAX_COUNT = 6;
 
-  const [selectedNumbers, setSelectedNumbers] = useState([]);
+  const [state, setState] = useState({
+    isAuto: false,
+    selectedNumbers: [],
+  });
 
   const onSelect = (newNum) => {
-    if (selectedNumbers.length >= LOTTO_MAX_COUNT) {
+    if (
+      state.selectedNumbers.length >= LOTTO_MAX_COUNT &&
+      !state.selectedNumbers.includes(newNum)
+    ) {
       alert("최대 6개까지 선택가능합니다.");
       return;
     }
-    typeof newNum === "object"
-      ? setSelectedNumbers(newNum)
-      : selectedNumbers.includes(newNum)
-      ? setSelectedNumbers(selectedNumbers.filter((item) => item !== newNum))
-      : setSelectedNumbers([...selectedNumbers, newNum]);
+
+    if (typeof newNum === "object") {
+      setState({ isAuto: true, selectedNumbers: newNum });
+    } else {
+      state.selectedNumbers.includes(newNum)
+        ? setState({
+            isAuto: false,
+            selectedNumbers: state.selectedNumbers.filter(
+              (item) => item !== newNum
+            ),
+          })
+        : setState({
+            isAuto: false,
+            selectedNumbers: [...state.selectedNumbers, newNum],
+          });
+    }
   };
 
   const onRemove = () => {
-    setSelectedNumbers([]);
+    setState({
+      isAuto: false,
+      selectedNumbers: [],
+    });
   };
 
   const onAuto = () => {
@@ -37,6 +57,14 @@ const Selector = () => {
     onSelect(randomNumArr);
   };
 
+  const handleSubmit = () => {
+    if (state.selectedNumbers.length === LOTTO_MAX_COUNT) {
+      onSubmit(state.isAuto, state.selectedNumbers);
+      onRemove();
+      return;
+    }
+  };
+
   return (
     <div className="Selector">
       <div className="cost_tag">
@@ -46,7 +74,9 @@ const Selector = () => {
         {list.map((item) => (
           <Button
             key={item.id}
-            type={selectedNumbers.includes(item.id) ? "positive" : "default"}
+            type={
+              state.selectedNumbers.includes(item.id) ? "positive" : "default"
+            }
             text={item.id}
             onClick={() => onSelect(item.id)}
           />
@@ -55,7 +85,7 @@ const Selector = () => {
       <div className="control_btn">
         <Button type={"negative"} text={"초기화"} onClick={onRemove} />
         <Button type={"negative"} text={"자동선택"} onClick={onAuto} />
-        <Button type={"negative"} text={"완료"} onClick={() => alert("완료")} />
+        <Button type={"negative"} text={"완료"} onClick={handleSubmit} />
       </div>
     </div>
   );
