@@ -18,10 +18,21 @@ const App = () => {
     setData([...data, newLotto]);
   };
 
+  const onReset = () => {
+    setData([]);
+    dataId.current = 0;
+  };
+
+  const onRemove = (selected) => {
+    const newLottoList = data.filter((item) => item.id !== selected);
+    setData(newLottoList);
+    dataId.current -= 1;
+  };
+
   return (
     <div className="App">
       <Selector onSubmit={onSubmit} />
-      <LottoList lottoList={data} />
+      <LottoList onRemove={onRemove} onReset={onReset} lottoList={data} />
     </div>
   );
 };

@@ -1,6 +1,10 @@
 import Button from "./Button";
 
-const LottoItem = ({ id, isAuto, selectedNumbers }) => {
+const LottoItem = ({ onRemove, id, isAuto, selectedNumbers }) => {
+  const handleRemove = () => {
+    onRemove(id);
+  };
+
   return (
     <div className="LottoItem">
       <div className="tag">
@@ -14,7 +18,7 @@ const LottoItem = ({ id, isAuto, selectedNumbers }) => {
             <span key={num}>{num}</span>
           ))}
       </div>
-      <Button text={"삭제"} onClick={() => alert("삭제")} />
+      <Button text={"삭제"} onClick={handleRemove} />
     </div>
   );
 };

@@ -1,20 +1,16 @@
 import Button from "./Button";
 import LottoItem from "./LottoItem";
 
-const LottoList = ({ lottoList }) => {
+const LottoList = ({ onReset, onRemove, lottoList }) => {
   return (
     <div className="LottoList">
       <div className="header">
         <span>선택번호 확인</span>
-        <Button
-          text={"초기화"}
-          type={"negative"}
-          onClick={() => alert("초기화")}
-        />
+        <Button text={"초기화"} type={"negative"} onClick={onReset} />
       </div>
       <div className="lotto_list">
         {lottoList.map((item) => (
-          <LottoItem key={item.id} {...item} />
+          <LottoItem onRemove={onRemove} key={item.id} {...item} />
         ))}
       </div>
       <div className="result_btn">
