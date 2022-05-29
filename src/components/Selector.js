@@ -11,7 +11,7 @@ const Selector = ({ onSubmit }) => {
     selectedNumbers: [],
   });
 
-  const onSelect = (newNum) => {
+  const handleSelect = (newNum) => {
     if (
       state.selectedNumbers.length >= LOTTO_MAX_COUNT &&
       !state.selectedNumbers.includes(newNum)
@@ -37,14 +37,14 @@ const Selector = ({ onSubmit }) => {
     }
   };
 
-  const onRemove = () => {
+  const handleReset = () => {
     setState({
       isAuto: false,
       selectedNumbers: [],
     });
   };
 
-  const onAuto = () => {
+  const handleAuto = () => {
     const randomNumArr = [];
     for (let i = 0; i < 6; i++) {
       let randomNum = Math.floor(Math.random() * 45 + 1);
@@ -54,13 +54,13 @@ const Selector = ({ onSubmit }) => {
         i--;
       }
     }
-    onSelect(randomNumArr);
+    handleSelect(randomNumArr);
   };
 
   const handleSubmit = () => {
     if (state.selectedNumbers.length === LOTTO_MAX_COUNT) {
       onSubmit(state.isAuto, state.selectedNumbers);
-      onRemove();
+      handleReset();
       return;
     }
   };
@@ -78,13 +78,13 @@ const Selector = ({ onSubmit }) => {
               state.selectedNumbers.includes(item.id) ? "positive" : "default"
             }
             text={item.id}
-            onClick={() => onSelect(item.id)}
+            onClick={() => handleSelect(item.id)}
           />
         ))}
       </div>
       <div className="control_btn">
-        <Button type={"negative"} text={"초기화"} onClick={onRemove} />
-        <Button type={"negative"} text={"자동선택"} onClick={onAuto} />
+        <Button type={"negative"} text={"초기화"} onClick={handleReset} />
+        <Button type={"negative"} text={"자동선택"} onClick={handleAuto} />
         <Button type={"negative"} text={"완료"} onClick={handleSubmit} />
       </div>
     </div>
