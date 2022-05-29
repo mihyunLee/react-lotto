@@ -9,6 +9,9 @@ const App = () => {
   const dataId = useRef(0);
 
   const onSubmit = (isAuto, selectedNumbers) => {
+    if (data.length === 5) {
+      return;
+    }
     const newLotto = {
       isAuto,
       selectedNumbers,

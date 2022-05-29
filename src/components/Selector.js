@@ -58,11 +58,8 @@ const Selector = ({ onSubmit }) => {
   };
 
   const handleSubmit = () => {
-    if (state.selectedNumbers.length === LOTTO_MAX_COUNT) {
-      onSubmit(state.isAuto, state.selectedNumbers);
-      handleReset();
-      return;
-    }
+    onSubmit(state.isAuto, state.selectedNumbers);
+    handleReset();
   };
 
   return (
