@@ -5,11 +5,23 @@ import { LottoNumberItem } from "../LottoNumberItem";
 
 import "./style.css";
 
+const LottoItems = Array.from(
+    new Array(3), (v, i) => ({l_number: i, color: "success"})
+)
+
 export const LottoNumberList = ({ onSelect }) => {
   const [selectedNumbers, setSelectedNumbers] = useState([]);
 
   const saveNumbers = (newNum) => {
     setSelectedNumbers([...selectedNumbers, newNum]);
+    console.log("SAVE NUMBERS")
+    const items = LottoItem.map(item => {
+      return item.l_number === newNum - 1 ? {...item, color: "error"} : item
+    })
+
+    setLottoItem(items)
+    console.log(LottoItem)
+    // console.log(LottoItem)
   };
 
   const removeNumbers = (newNum) => {
@@ -17,24 +29,38 @@ export const LottoNumberList = ({ onSelect }) => {
     setSelectedNumbers(newNumbers);
   };
   const onResetLottoItems = () => {
-    const newItem = [...OriginalLottoItems];
+    const items = LottoItems.map(item => {
+      return item.color === "error" ? {...item, color: "success"} : item
+    })
     setSelectedNumbers([])
-    setLottoItem(OriginalLottoItems)
+    setLottoItem(items)
+    console.log(LottoItem)
   }
-  const OriginalLottoItems = Array.from(new Array(45), (v, i) => (
-    <LottoNumberItem
-      key={i + 1}
-      lottoNumber={i + 1}
-      saveNumbers={saveNumbers}
-      removeNumbers={removeNumbers}
-      selectedNumbers={selectedNumbers}
-    />
-  ));
-  const [LottoItem, setLottoItem] = useState([...OriginalLottoItems])
+  // const onResetLottoItems = () => {
+  //   setSelectedNumbers([])
+  //   setLottoItem(LottoItems.map(it => {
+  //     console.log(it.color == "error")
+  //       return it.color === "error" ? {...it, color:"success"} : it
+  //     }))
+  //   console.log("ITEM : ")
+  //   console.log(LottoItem)
+  // }
+  // // [{}, {}, {}...]
 
+  const [LottoItem, setLottoItem] = useState(LottoItems)
   return (
     <div className="LottoNumberList">
-      <div className="LottoNumber">{LottoItem}</div>
+      <div className="LottoNumber">
+        {
+          LottoItem.map(i => <LottoNumberItem
+          key={i.l_number + 1}
+          initColor={i.color}
+          lottoNumber={i.l_number + 1}
+          saveNumbers={saveNumbers}
+          removeNumbers={removeNumbers}
+          selectedNumbers={selectedNumbers}/>)
+        }
+      </div>
       <LottoNumberControl
         selectedNumbers={selectedNumbers}
         onSelect={onSelect}

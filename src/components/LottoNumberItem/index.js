@@ -14,11 +14,11 @@ export const LottoNumberItem = ({
   removeNumbers,
   saveNumbers,
   selectedNumbers,
-  lottoNumber,
+  lottoNumber, initColor
 }) => {
   const LOTTO_MAX_COUNT = 6;
 
-  const [color, setColor] = useState("success");
+  const [color, setColor] = useState(initColor);
   const [isClicked, setIsClicked] = useState(true);
 
   const clickNumber = (e) => {
