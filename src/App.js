@@ -1,10 +1,34 @@
-import { useRef, useState } from "react";
+import React, { useMemo, useReducer, useRef } from "react";
 import "./App.css";
 import LottoList from "./components/LottoList";
 import Selector from "./components/Selector";
 
+const reducer = (state, action) => {
+  let newState = [];
+  switch (action.type) {
+    case "SUBMIT": {
+      newState = [...state, action.data];
+      break;
+    }
+    case "RESET": {
+      newState = [];
+      break;
+    }
+    case "REMOVE": {
+      newState = state.filter((item) => item.id !== action.selected);
+      break;
+    }
+    default:
+      return state;
+  }
+  return newState;
+};
+
+export const LottoStateContext = React.createContext();
+export const LottoDispatchContext = React.createContext();
+
 const App = () => {
-  const [data, setData] = useState([]);
+  const [data, dispatch] = useReducer(reducer, []);
 
   const dataId = useRef(0);
 
@@ -12,31 +36,45 @@ const App = () => {
     if (data.length === 5) {
       return;
     }
-    const newLotto = {
-      isAuto,
-      selectedNumbers,
-      id: dataId.current,
-    };
+
+    dispatch({
+      type: "SUBMIT",
+      data: { isAuto, selectedNumbers, id: dataId.current },
+    });
+
     dataId.current += 1;
-    setData([...data, newLotto]);
   };
 
   const onReset = () => {
-    setData([]);
+    dispatch({
+      type: "RESET",
+    });
+
     dataId.current = 0;
   };
 
   const onRemove = (selected) => {
-    const newLottoList = data.filter((item) => item.id !== selected);
-    setData(newLottoList);
+    dispatch({
+      type: "REMOVE",
+      selected,
+    });
+
     dataId.current -= 1;
   };
 
+  const memoizedDispatches = useMemo(() => {
+    return { onSubmit, onReset, onRemove };
+  }, []);
+
   return (
-    <div className="App">
-      <Selector onSubmit={onSubmit} />
-      <LottoList onRemove={onRemove} onReset={onReset} lottoList={data} />
-    </div>
+    <LottoStateContext.Provider value={data}>
+      <LottoDispatchContext.Provider value={memoizedDispatches}>
+        <div className="App">
+          <Selector />
+          <LottoList />
+        </div>
+      </LottoDispatchContext.Provider>
+    </LottoStateContext.Provider>
   );
 };
 

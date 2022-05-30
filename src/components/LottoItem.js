@@ -1,6 +1,10 @@
+import { useContext } from "react";
+import { LottoDispatchContext } from "../App";
 import Button from "./Button";
 
-const LottoItem = ({ onRemove, id, isAuto, selectedNumbers }) => {
+const LottoItem = ({ id, isAuto, selectedNumbers }) => {
+  const { onRemove } = useContext(LottoDispatchContext);
+
   const handleRemove = () => {
     onRemove(id);
   };

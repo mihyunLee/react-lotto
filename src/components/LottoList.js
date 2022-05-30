@@ -1,7 +1,12 @@
+import { useContext } from "react";
+import { LottoDispatchContext, LottoStateContext } from "../App";
 import Button from "./Button";
 import LottoItem from "./LottoItem";
 
-const LottoList = ({ onReset, onRemove, lottoList }) => {
+const LottoList = () => {
+  const lottoList = useContext(LottoStateContext);
+  const { onReset } = useContext(LottoDispatchContext);
+
   return (
     <div className="LottoList">
       <div className="header">
@@ -14,7 +19,7 @@ const LottoList = ({ onReset, onRemove, lottoList }) => {
       </div>
       <div className="lotto_list">
         {lottoList.map((item) => (
-          <LottoItem onRemove={onRemove} key={item.id} {...item} />
+          <LottoItem key={item.id} {...item} />
         ))}
       </div>
       <div className="result_btn">

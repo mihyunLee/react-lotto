@@ -1,15 +1,18 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { LottoDispatchContext } from "../App";
 import Button from "./Button";
 
 const list = [...Array(45).keys()].map((x) => ({ id: x + 1 }));
 
-const Selector = ({ onSubmit }) => {
+const Selector = () => {
   const LOTTO_MAX_COUNT = 6;
 
   const [state, setState] = useState({
     isAuto: false,
     selectedNumbers: [],
   });
+
+  const { onSubmit } = useContext(LottoDispatchContext);
 
   const handleSelect = (newNum) => {
     if (
