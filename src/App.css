@@ -1,36 +1,121 @@
-@media (min-width: 650px) {
-  .App {
-  }
+@font-face {
+  font-family: "NanumSquareRound";
+  src: url("https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/NanumSquareRound.woff")
+    format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+* {
+  font-family: "NanumSquareRound", sans-serif;
+  font-size: 18px;
+  letter-spacing: -0.03rem;
+  white-space: nowrap;
+}
+body {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
+  background-color: #f1f5f9;
+  min-height: 100vh;
+
+  display: flex;
+  justify-content: center;
+  align-itmes: center;
 }
 
-@media (max-width: 650px) {
-  .App {
-    flex-wrap: wrap;
-  }
+#root {
+  background-color: white;
 }
 
 .App {
-  width: 80vw;
+  padding: 0px 50px;
+  width: 90vw;
   min-height: 100vh;
-  padding: 0 20px;
+}
+
+/* Button */
+.Button {
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+  padding: 20px 40px;
+  transition: all 0.3s ease-in-out;
+}
+
+.Button_default {
+  background-color: #ececec;
+  color: black;
+}
+
+.Button_positive {
+  background-color: #4292ed;
+  color: white;
+}
+
+.Button_negative {
+  background-color: #63686e;
+  color: white;
+}
+
+/* Selector */
+.Selector {
+  width: 400px;
+  padding: 30px 0px;
+}
+
+.Selector .cost_tag {
+  display: flex;
+  justify-content: center;
+  margin-right: 5px;
+  margin-bottom: 16px;
+  border: 0.5px solid #f56d6d;
+}
+
+.Selector .cost_tag span {
+  font-size: 28px;
+  color: white;
+  margin-left: 100px;
+  padding: 15px 10px;
+  background-color: #f56d6d;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.Selector .number_list {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.Selector .number_list Button {
   display: flex;
   justify-content: center;
   align-items: center;
+  padding: 28px;
+  width: 30px;
+  height: 30px;
+  margin: 5px;
 }
 
-@media (min-width: 650px) {
-  .Wrapper {
-    width: 80%;
-  }
+.Selector .control_btn {
+  display: grid;
+  grid-template-areas:
+    "reset auto"
+    "submit submit";
+  gap: 10px;
 }
 
-@media (max-width: 650px) {
-  .Wrapper {
-    width: 70vw;
-  }
+.Selector .control_btn Button:nth-child(1) {
+  grid-area: reset;
 }
 
-.Wrapper {
-  padding: 20px;
-  font-size: 1.5rem;
+.Selector .control_btn Button:nth-child(2) {
+  grid-area: auto;
+}
+
+.Selector .control_btn Button:nth-child(3) {
+  grid-area: submit;
 }
