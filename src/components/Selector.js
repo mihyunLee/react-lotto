@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react";
-import { LottoDispatchContext } from "../App";
+import { LottoDispatchContext, LottoStateContext } from "../App";
 import Button from "./Button";
 
 const list = [...Array(45).keys()].map((x) => ({ id: x + 1 }));
@@ -12,6 +12,7 @@ const Selector = () => {
     selectedNumbers: [],
   });
 
+  const lottoList = useContext(LottoStateContext);
   const { onSubmit } = useContext(LottoDispatchContext);
 
   const handleSelect = (newNum) => {
@@ -61,8 +62,14 @@ const Selector = () => {
   };
 
   const handleSubmit = () => {
-    onSubmit(state.isAuto, state.selectedNumbers);
-    handleReset();
+    if (
+      state.selectedNumbers.length === LOTTO_MAX_COUNT &&
+      lottoList.length < 5
+    ) {
+      onSubmit(state.isAuto, state.selectedNumbers);
+      handleReset();
+      return;
+    }
   };
 
   return (

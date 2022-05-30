@@ -32,21 +32,14 @@ const App = () => {
 
   const dataId = useRef(0);
 
-  const onSubmit = useCallback(
-    (isAuto, selectedNumbers) => {
-      if (data.length === 5) {
-        return;
-      }
+  const onSubmit = useCallback((isAuto, selectedNumbers) => {
+    dispatch({
+      type: "SUBMIT",
+      data: { isAuto, selectedNumbers, id: dataId.current },
+    });
 
-      dispatch({
-        type: "SUBMIT",
-        data: { isAuto, selectedNumbers, id: dataId.current },
-      });
-
-      dataId.current += 1;
-    },
-    [data.length]
-  );
+    dataId.current += 1;
+  }, []);
 
   const onReset = useCallback(() => {
     dispatch({
