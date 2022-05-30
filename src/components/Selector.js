@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import React, { useContext, useState } from "react";
 import { LottoDispatchContext } from "../App";
 import Button from "./Button";
 
@@ -91,4 +91,4 @@ const Selector = () => {
   );
 };
 
-export default Selector;
+export default React.memo(Selector);

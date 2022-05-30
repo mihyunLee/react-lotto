@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import React, { useContext } from "react";
 import { LottoDispatchContext } from "../App";
 import Button from "./Button";
 
@@ -27,4 +27,4 @@ const LottoItem = ({ id, isAuto, selectedNumbers }) => {
   );
 };
 
-export default LottoItem;
+export default React.memo(LottoItem);

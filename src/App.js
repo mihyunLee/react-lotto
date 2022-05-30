@@ -1,4 +1,4 @@
-import React, { useMemo, useReducer, useRef } from "react";
+import React, { useCallback, useMemo, useReducer, useRef } from "react";
 import "./App.css";
 import LottoList from "./components/LottoList";
 import Selector from "./components/Selector";
@@ -32,35 +32,38 @@ const App = () => {
 
   const dataId = useRef(0);
 
-  const onSubmit = (isAuto, selectedNumbers) => {
-    if (data.length === 5) {
-      return;
-    }
+  const onSubmit = useCallback(
+    (isAuto, selectedNumbers) => {
+      if (data.length === 5) {
+        return;
+      }
 
-    dispatch({
-      type: "SUBMIT",
-      data: { isAuto, selectedNumbers, id: dataId.current },
-    });
+      dispatch({
+        type: "SUBMIT",
+        data: { isAuto, selectedNumbers, id: dataId.current },
+      });
 
-    dataId.current += 1;
-  };
+      dataId.current += 1;
+    },
+    [data.length]
+  );
 
-  const onReset = () => {
+  const onReset = useCallback(() => {
     dispatch({
       type: "RESET",
     });
 
     dataId.current = 0;
-  };
+  }, []);
 
-  const onRemove = (selected) => {
+  const onRemove = useCallback((selected) => {
     dispatch({
       type: "REMOVE",
       selected,
     });
 
     dataId.current -= 1;
-  };
+  }, []);
 
   const memoizedDispatches = useMemo(() => {
     return { onSubmit, onReset, onRemove };
