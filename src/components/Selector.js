@@ -1,11 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useCallback, useContext, useState } from "react";
 import { LottoDispatchContext, LottoStateContext } from "../App";
 import Button from "./Button";
+import SelectorItem from "./SelectorItem";
 
 const list = [...Array(45).keys()].map((x) => ({ id: x + 1 }));
 
 const Selector = () => {
-  const LOTTO_MAX_COUNT = 6;
+  const SELECTED_MAX_COUNT = 6;
+  const LOTTO_MAX_COUNT = 5;
 
   const [state, setState] = useState({
     isAuto: false,
@@ -15,31 +17,33 @@ const Selector = () => {
   const lottoList = useContext(LottoStateContext);
   const { onSubmit } = useContext(LottoDispatchContext);
 
-  const handleSelect = (newNum) => {
-    if (
-      state.selectedNumbers.length >= LOTTO_MAX_COUNT &&
-      !state.selectedNumbers.includes(newNum)
-    ) {
-      alert("최대 6개까지 선택가능합니다.");
-      return;
-    }
-
-    if (typeof newNum === "object") {
-      setState({ isAuto: true, selectedNumbers: newNum });
-    } else {
-      state.selectedNumbers.includes(newNum)
-        ? setState({
-            isAuto: false,
-            selectedNumbers: state.selectedNumbers.filter(
-              (item) => item !== newNum
-            ),
-          })
-        : setState({
-            isAuto: false,
-            selectedNumbers: [...state.selectedNumbers, newNum],
-          });
-    }
+  const handleChangeState = (newNum) => {
+    setState((state) => ({
+      isAuto: false,
+      selectedNumbers: state.selectedNumbers.includes(newNum)
+        ? state.selectedNumbers.filter((item) => item !== newNum)
+        : [...state.selectedNumbers, newNum],
+    }));
   };
+
+  const handleSelect = useCallback(
+    (newNum) => {
+      if (
+        state.selectedNumbers.length >= SELECTED_MAX_COUNT &&
+        !state.selectedNumbers.includes(newNum)
+      ) {
+        alert("최대 6개까지 선택가능합니다.");
+        return;
+      }
+
+      if (typeof newNum === "object") {
+        setState({ isAuto: true, selectedNumbers: newNum });
+      } else {
+        handleChangeState(newNum);
+      }
+    },
+    [state.selectedNumbers]
+  );
 
   const handleReset = () => {
     setState({
@@ -63,8 +67,8 @@ const Selector = () => {
 
   const handleSubmit = () => {
     if (
-      state.selectedNumbers.length === LOTTO_MAX_COUNT &&
-      lottoList.length < 5
+      state.selectedNumbers.length === SELECTED_MAX_COUNT &&
+      lottoList.length < LOTTO_MAX_COUNT
     ) {
       onSubmit(state.isAuto, state.selectedNumbers);
       handleReset();
@@ -79,13 +83,11 @@ const Selector = () => {
       </div>
       <div className="number_list">
         {list.map((item) => (
-          <Button
+          <SelectorItem
             key={item.id}
-            type={
-              state.selectedNumbers.includes(item.id) ? "positive" : "default"
-            }
-            text={item.id}
-            onClick={() => handleSelect(item.id)}
+            {...item}
+            isSelected={state.selectedNumbers.includes(item.id)}
+            onClick={handleSelect}
           />
         ))}
       </div>
