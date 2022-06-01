@@ -168,7 +168,8 @@ body {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  justify-content: center;
+
+  margin: 4px 0px;
 }
 
 .LottoList .result_btn Button {
@@ -183,7 +184,8 @@ body {
   justify-content: space-between;
   align-items: center;
 
-  margin-bottom: 30px;
+  padding: 20px 0px;
+  border-bottom: 2px dashed #e2e2e2;
 }
 
 .LottoItem .tag span {
@@ -197,11 +199,45 @@ body {
   justify-content: space-between;
 }
 
+.LottoItem .content div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+
+  margin: 0px 5px;
+}
+
+.LottoItem .content .quotient-zero {
+  background-color: #fce832;
+}
+
+.LottoItem .content .quotient-one {
+  background-color: #68c6f0;
+}
+
+.LottoItem .content .quotient-two {
+  background-color: #ff7272;
+}
+
+.LottoItem .content .quotient-three {
+  background-color: #a7a8a7;
+}
+
+.LottoItem .content .quotient-four {
+  background-color: #95c73a;
+}
+
 .LottoItem .content span {
   font-size: 22px;
-  margin: 0px 20px;
+  color: white;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .LottoItem Button {
   margin-left: 20px;
+  padding: 15px 30px;
 }
