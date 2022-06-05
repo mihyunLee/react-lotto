@@ -21,7 +21,7 @@ body {
 
   display: flex;
   justify-content: center;
-  align-itmes: center;
+  align-items: center;
 }
 
 #root {
@@ -30,8 +30,11 @@ body {
 
 .App {
   padding: 0px 50px;
-  width: 90vw;
+  width: 1152px;
   min-height: 100vh;
+
+  display: flex;
+  align-items: center;
 }
 
 /* Button */
@@ -61,6 +64,7 @@ body {
 /* Selector */
 .Selector {
   width: 400px;
+  height: 760px;
   padding: 30px 0px;
 }
 
@@ -118,4 +122,86 @@ body {
 
 .Selector .control_btn Button:nth-child(3) {
   grid-area: submit;
+}
+
+/* LottoList */
+.LottoList {
+  flex-grow: 1;
+  height: 760px;
+  padding: 10px 30px;
+  margin: 0px 20px;
+  border: 1px solid #e2e2e2;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.LottoList .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  padding: 10px 0px;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.LottoList .header span {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.LottoList .lotto_count {
+  display: flex;
+  flex-direction: column;
+
+  padding-top: 30px;
+}
+
+.LottoList .lotto_count span:nth-child(2) {
+  font-size: 16px;
+  font-weight: bold;
+  color: #f56d6d;
+}
+
+.LottoList .lotto_list {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.LottoList .result_btn Button {
+  width: 100%;
+  padding: 25px 0px;
+  font-size: 22px;
+}
+
+/* LottoItem */
+.LottoItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  margin-bottom: 30px;
+}
+
+.LottoItem .tag span {
+  font-size: 22px;
+  margin-right: 20px;
+}
+
+.LottoItem .content {
+  flex-grow: 1;
+  display: flex;
+  justify-content: space-between;
+}
+
+.LottoItem .content span {
+  font-size: 22px;
+  margin: 0px 20px;
+}
+
+.LottoItem Button {
+  margin-left: 20px;
 }

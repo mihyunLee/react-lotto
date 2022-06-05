@@ -1,4 +1,5 @@
-import { useState } from "react";
+import React, { useContext, useState } from "react";
+import { LottoDispatchContext, LottoStateContext } from "../App";
 import Button from "./Button";
 
 const list = [...Array(45).keys()].map((x) => ({ id: x + 1 }));
@@ -6,25 +7,49 @@ const list = [...Array(45).keys()].map((x) => ({ id: x + 1 }));
 const Selector = () => {
   const LOTTO_MAX_COUNT = 6;
 
-  const [selectedNumbers, setSelectedNumbers] = useState([]);
+  const [state, setState] = useState({
+    isAuto: false,
+    selectedNumbers: [],
+  });
 
-  const onSelect = (newNum) => {
-    if (selectedNumbers.length >= LOTTO_MAX_COUNT) {
+  const lottoList = useContext(LottoStateContext);
+  const { onSubmit } = useContext(LottoDispatchContext);
+
+  const handleSelect = (newNum, isRandom) => {
+    if (
+      state.selectedNumbers.length >= LOTTO_MAX_COUNT &&
+      !state.selectedNumbers.includes(newNum) &&
+      !isRandom
+    ) {
       alert("최대 6개까지 선택가능합니다.");
       return;
     }
-    typeof newNum === "object"
-      ? setSelectedNumbers(newNum)
-      : selectedNumbers.includes(newNum)
-      ? setSelectedNumbers(selectedNumbers.filter((item) => item !== newNum))
-      : setSelectedNumbers([...selectedNumbers, newNum]);
+
+    if (typeof newNum === "object") {
+      setState({ isAuto: true, selectedNumbers: newNum });
+    } else {
+      state.selectedNumbers.includes(newNum)
+        ? setState({
+            isAuto: false,
+            selectedNumbers: state.selectedNumbers.filter(
+              (item) => item !== newNum
+            ),
+          })
+        : setState({
+            isAuto: false,
+            selectedNumbers: [...state.selectedNumbers, newNum],
+          });
+    }
   };
 
-  const onRemove = () => {
-    setSelectedNumbers([]);
+  const handleReset = () => {
+    setState({
+      isAuto: false,
+      selectedNumbers: [],
+    });
   };
 
-  const onAuto = () => {
+  const handleAuto = () => {
     const randomNumArr = [];
     for (let i = 0; i < 6; i++) {
       let randomNum = Math.floor(Math.random() * 45 + 1);
@@ -34,7 +59,17 @@ const Selector = () => {
         i--;
       }
     }
-    onSelect(randomNumArr);
+    handleSelect(randomNumArr, true);
+  };
+
+  const handleSubmit = () => {
+    if (
+      state.selectedNumbers.length === LOTTO_MAX_COUNT &&
+      lottoList.length < 5
+    ) {
+      onSubmit(state.isAuto, state.selectedNumbers);
+      handleReset();
+    }
   };
 
   return (
@@ -46,19 +81,21 @@ const Selector = () => {
         {list.map((item) => (
           <Button
             key={item.id}
-            type={selectedNumbers.includes(item.id) ? "positive" : "default"}
+            type={
+              state.selectedNumbers.includes(item.id) ? "positive" : "default"
+            }
             text={item.id}
-            onClick={() => onSelect(item.id)}
+            onClick={() => handleSelect(item.id, false)}
           />
         ))}
       </div>
       <div className="control_btn">
-        <Button type={"negative"} text={"초기화"} onClick={onRemove} />
-        <Button type={"negative"} text={"자동선택"} onClick={onAuto} />
-        <Button type={"negative"} text={"완료"} onClick={() => alert("완료")} />
+        <Button type={"negative"} text={"초기화"} onClick={handleReset} />
+        <Button type={"negative"} text={"자동선택"} onClick={handleAuto} />
+        <Button type={"negative"} text={"완료"} onClick={handleSubmit} />
       </div>
     </div>
   );
 };
 
-export default Selector;
+export default React.memo(Selector);
