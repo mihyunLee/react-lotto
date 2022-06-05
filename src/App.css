@@ -241,3 +241,50 @@ body {
   margin-left: 20px;
   padding: 15px 30px;
 }
+
+/* Result */
+.LottoResult {
+  flex-grow: 1;
+  height: 760px;
+  padding: 10px 30px;
+  margin: 0px 20px;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.LottoResult .header {
+  background-color: #4292ed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 10px 0px;
+  border-bottom: 1px solid #e2e2e2;
+}
+
+.LottoResult .header span {
+  font-size: 24px;
+  font-weight: bold;
+  color: #ececec;
+}
+
+.LottoResult .content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.LottoResult .lotto_list {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  padding-left: 120px;
+}
+
+.LottoResult .result_btn Button {
+  width: 100%;
+  padding: 25px 0px;
+  font-size: 22px;
+}

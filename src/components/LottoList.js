@@ -1,5 +1,6 @@
 import { useContext } from "react";
 import { LottoDispatchContext, LottoStateContext } from "../App";
+import { Link } from "react-router-dom";
 import Button from "./Button";
 import LottoItem from "./LottoItem";
 
@@ -23,11 +24,12 @@ const LottoList = () => {
         ))}
       </div>
       <div className="result_btn">
-        <Button
-          text={"결과보기"}
-          type={"positive"}
-          onClick={() => alert("결과보기")}
-        />
+        <Link to="/result">
+          <Button
+            text={"결과보기"}
+            type={"positive"}
+          />
+        </Link>
       </div>
     </div>
   );
