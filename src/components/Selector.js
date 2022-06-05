@@ -62,7 +62,7 @@ const Selector = () => {
         i--;
       }
     }
-    handleSelect(randomNumArr);
+    handleSelect(randomNumArr, true);
   };
 
   const handleSubmit = () => {
@@ -72,7 +72,6 @@ const Selector = () => {
     ) {
       onSubmit(state.isAuto, state.selectedNumbers);
       handleReset();
-      return;
     }
   };
 

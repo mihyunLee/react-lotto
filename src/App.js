@@ -23,14 +23,43 @@ const reducer = (state, action) => {
   }
   return newState;
 };
-
+const findLastId = () => {
+  let storageData = window.localStorage.getItem('lottoItems')
+  if(storageData){
+    let listStorage = JSON.parse(storageData)
+    return listStorage[listStorage.length - 1].id + 1
+  }
+  return 0
+}
+const addLottoItemInLocalStorage = (item) => {
+  let storageData = window.localStorage.getItem('lottoItems')
+  if(storageData){
+    let listStorage = JSON.parse(storageData)
+    listStorage.push(item)
+    window.localStorage.setItem('lottoItems', JSON.stringify(listStorage))
+  }else{
+    window.localStorage.setItem('lottoItems', JSON.stringify([item]))
+  }
+}
+const removeLottoItemInLocalStorage = (selected) => {
+  let storageData = window.localStorage.getItem('lottoItems')
+  if(storageData){
+    let listStorage = JSON.parse(storageData)
+    listStorage.filter(item => item.id !== selected)
+  }
+}
+const getLottoItemInLocalStorage = () => {
+  const storageData = window.localStorage.getItem('lottoItems')
+  if(storageData)
+    return JSON.parse(storageData)
+  return []
+}
 export const LottoStateContext = React.createContext();
 export const LottoDispatchContext = React.createContext();
 
 const App = () => {
-  const [data, dispatch] = useReducer(reducer, []);
-
-  const dataId = useRef(0);
+  const [data, dispatch] = useReducer(reducer, getLottoItemInLocalStorage());
+  const dataId = useRef(findLastId());
 
   const onSubmit = useCallback((isAuto, selectedNumbers) => {
     dispatch({
@@ -39,6 +68,7 @@ const App = () => {
     });
 
     dataId.current += 1;
+    addLottoItemInLocalStorage({ isAuto, selectedNumbers, id: dataId.current })
   }, []);
 
   const onReset = useCallback(() => {
@@ -54,8 +84,7 @@ const App = () => {
       type: "REMOVE",
       selected,
     });
-
-    dataId.current -= 1;
+    removeLottoItemInLocalStorage(selected)
   }, []);
 
   const memoizedDispatches = useMemo(() => {

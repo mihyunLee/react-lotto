@@ -6,7 +6,7 @@ import LottoItem from "./LottoItem";
 const LottoList = () => {
   const lottoList = useContext(LottoStateContext);
   const { onReset } = useContext(LottoDispatchContext);
-
+  console.log(lottoList)
   return (
     <div className="LottoList">
       <div className="header">
@@ -18,8 +18,8 @@ const LottoList = () => {
         <span>(로또는 최대 5개까지 구매 가능합니다.)</span>
       </div>
       <div className="lotto_list">
-        {lottoList.map((item) => (
-          <LottoItem key={item.id} {...item} />
+        {lottoList.map((item, index) => (
+          <LottoItem key={item.id} idx={index + 1} {...item} />
         ))}
       </div>
       <div className="result_btn">
