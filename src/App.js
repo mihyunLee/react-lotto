@@ -44,10 +44,17 @@ const addLottoItemInLocalStorage = (item) => {
   }
 }
 const removeLottoItemInLocalStorage = (selected) => {
-  let storageData = window.localStorage.getItem('lottoItems')
+  const storageData = window.localStorage.getItem('lottoItems')
   if(storageData){
-    let listStorage = JSON.parse(storageData)
-    listStorage.filter(item => item.id !== selected)
+    const listStorage = JSON.parse(storageData).filter(item => {
+      return item.id !== selected
+    })
+
+    if(listStorage.length)
+      window.localStorage.setItem("lottoItems", JSON.stringify(listStorage))
+    else
+      window.localStorage.removeItem("lottoItems")
+
   }
 }
 const getLottoItemInLocalStorage = () => {
@@ -56,6 +63,7 @@ const getLottoItemInLocalStorage = () => {
     return JSON.parse(storageData)
   return []
 }
+
 export const LottoStateContext = React.createContext();
 export const LottoDispatchContext = React.createContext();
 
@@ -86,7 +94,7 @@ const App = () => {
       type: "REMOVE",
       selected,
     });
-    removeLottoItemInLocalStorage(selected)
+    removeLottoItemInLocalStorage(selected + 1)
   }, []);
 
   const memoizedDispatches = useMemo(() => {
@@ -99,15 +107,15 @@ const App = () => {
         <BrowserRouter>
           <Routes>
             <Route path="/" element={
-            <div className="App">
-              <Selector />
-              <LottoList />
-            </div>
+              <div className="App">
+                <Selector />
+                <LottoList />
+              </div>
             } />
             <Route path="result" element={
-            <div className="App">
-              <Result/>
-            </div>
+              <div className="App">
+                <Result/>
+              </div>
             }/>
           </Routes>
          </BrowserRouter>
