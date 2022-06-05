@@ -94,26 +94,25 @@ const App = () => {
   }, []);
 
   return (
-    <BrowserRouter>
-      <Routes>
-      <Route path="/" element={
-          <LottoStateContext.Provider value={data}>
-          <LottoDispatchContext.Provider value={memoizedDispatches}>
+    <LottoStateContext.Provider value={data}>
+      <LottoDispatchContext.Provider value={memoizedDispatches}>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={
             <div className="App">
               <Selector />
               <LottoList />
             </div>
-          </LottoDispatchContext.Provider>
-        </LottoStateContext.Provider>
-      } />
-      <Route path="result" element={
-
-        <div className="App">
-          <Result/>
-        </div>
-      }/>
-      </Routes>
-    </BrowserRouter>
+            } />
+            <Route path="result" element={
+            <div className="App">
+              <Result/>
+            </div>
+            }/>
+          </Routes>
+         </BrowserRouter>
+      </LottoDispatchContext.Provider>
+    </LottoStateContext.Provider>
   );
 };
 

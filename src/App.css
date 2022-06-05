@@ -265,22 +265,29 @@ body {
 }
 
 .LottoResult .header span {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: bold;
   color: #ececec;
 }
 
 .LottoResult .content {
   display: flex;
-  flex-direction: column;
   align-items: center;
+  justify-content: center;
+
+  margin-top: 30px;
+}
+
+.LottoResult .content span {
+  font-size: 22px;
+  font-weight: bold;
 }
 
 .LottoResult .lotto_list {
+  margin-top: 30px;
+  flex-grow: 1;
   display: flex;
   flex-direction: column;
-  text-align: left;
-  padding-left: 120px;
 }
 
 .LottoResult .result_btn Button {
