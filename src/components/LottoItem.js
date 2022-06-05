@@ -9,6 +9,30 @@ const LottoItem = ({ id, idx, isAuto, selectedNumbers }) => {
     onRemove(id);
   };
 
+  const handleChangeColor = (num) => {
+    let color = "";
+    switch (parseInt(num / 10)) {
+      case 0:
+        color = "quotient-zero";
+        break;
+      case 1:
+        color = "quotient-one";
+        break;
+      case 2:
+        color = "quotient-two";
+        break;
+      case 3:
+        color = "quotient-three";
+        break;
+      case 4:
+        color = "quotient-four";
+        break;
+      default:
+        color = "#e2e2e2";
+    }
+    return color;
+  };
+
   return (
     <div className="LottoItem">
       <div className="tag">
@@ -19,7 +43,9 @@ const LottoItem = ({ id, idx, isAuto, selectedNumbers }) => {
         {selectedNumbers
           .sort((a, b) => a - b)
           .map((num) => (
-            <span key={num}>{num}</span>
+            <div key={num} className={handleChangeColor(num)}>
+              <span>{num}</span>
+            </div>
           ))}
       </div>
       <Button text={"삭제"} onClick={handleRemove} />
