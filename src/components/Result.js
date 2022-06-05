@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from "react";
+import React, { useContext } from "react";
 import Button from "./Button";
 import { Link } from "react-router-dom";
 import { LottoDispatchContext, LottoStateContext } from "../App";
@@ -15,21 +15,18 @@ const Result = () => {
       </div>
       <div className="content">
         <span>당첨번호</span>
-        <div calssName="winningNumber">
+        <div className="winningNumber">
             {/* 무작위 당첨번호 리스트 보여주기! */}
         </div>
       </div>
-      <div className="lotto_list">        
+      <div className="lotto_list">
         {lottoList.map((item, index) => (
-          <LottoItem key={item.id} idx={index + 1} {...item} />
+          <LottoItem key={item.id} idx={index + 1} isDeleteBtnHide={true} {...item} />
         ))}
       </div>
       <div className="result_btn">
         <Link to='/'>
-        <Button
-          text={"다시하기"}
-          type={"positive"}
-        />
+          <Button text={"다시하기"} type={"positive"} />
         </Link>
       </div>
     </div>

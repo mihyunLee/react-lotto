@@ -7,7 +7,7 @@ import LottoItem from "./LottoItem";
 const LottoList = () => {
   const lottoList = useContext(LottoStateContext);
   const { onReset } = useContext(LottoDispatchContext);
-  console.log(lottoList)
+
   return (
     <div className="LottoList">
       <div className="header">
