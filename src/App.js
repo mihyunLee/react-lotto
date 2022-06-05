@@ -1,7 +1,9 @@
 import React, { useCallback, useMemo, useReducer, useRef } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import LottoList from "./components/LottoList";
 import Selector from "./components/Selector";
+import Result from "./components/Result";
 
 const reducer = (state, action) => {
   let newState = [];
@@ -94,10 +96,21 @@ const App = () => {
   return (
     <LottoStateContext.Provider value={data}>
       <LottoDispatchContext.Provider value={memoizedDispatches}>
-        <div className="App">
-          <Selector />
-          <LottoList />
-        </div>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={
+            <div className="App">
+              <Selector />
+              <LottoList />
+            </div>
+            } />
+            <Route path="result" element={
+            <div className="App">
+              <Result/>
+            </div>
+            }/>
+          </Routes>
+         </BrowserRouter>
       </LottoDispatchContext.Provider>
     </LottoStateContext.Provider>
   );
