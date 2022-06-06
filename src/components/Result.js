@@ -5,8 +5,8 @@ import { LottoDispatchContext, LottoStateContext } from "../App";
 import LottoItem from "./LottoItem";
 
 const Result = () => {
-    const lottoList = useContext(LottoStateContext);
-    const { onReset } = useContext(LottoDispatchContext);
+  const lottoList = useContext(LottoStateContext);
+  const { onReset } = useContext(LottoDispatchContext);
 
   return (
     <div className="LottoResult">
@@ -16,17 +16,17 @@ const Result = () => {
       <div className="content">
         <span>당첨번호</span>
         <div className="winningNumber">
-            {/* 무작위 당첨번호 리스트 보여주기! */}
+          {/* 무작위 당첨번호 리스트 보여주기! */}
         </div>
       </div>
       <div className="lotto_list">
-        {lottoList.map((item, index) => (
-          <LottoItem key={item.id} idx={index + 1} isDeleteBtnHide={true} {...item} />
+        {lottoList.map((item) => (
+          <LottoItem key={item.id} isDeleteBtnHide={true} {...item} />
         ))}
       </div>
       <div className="result_btn">
-        <Link to='/'>
-          <Button text={"다시하기"} type={"positive"} />
+        <Link to="/">
+          <Button text={"다시하기"} type={"positive"} onClick={onReset} />
         </Link>
       </div>
     </div>

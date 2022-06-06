@@ -19,16 +19,13 @@ const LottoList = () => {
         <span>(로또는 최대 5개까지 구매 가능합니다.)</span>
       </div>
       <div className="lotto_list">
-        {lottoList.map((item, index) => (
-          <LottoItem key={item.id} idx={index + 1} {...item} />
+        {lottoList.map((item) => (
+          <LottoItem key={item.id} {...item} />
         ))}
       </div>
       <div className="result_btn">
         <Link to="/result">
-          <Button
-            text={"결과보기"}
-            type={"positive"}
-          />
+          <Button text={"결과보기"} type={"positive"} />
         </Link>
       </div>
     </div>

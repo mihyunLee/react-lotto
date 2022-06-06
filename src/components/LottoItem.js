@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import { LottoDispatchContext } from "../App";
 import Button from "./Button";
 
-const LottoItem = ({ id, idx, isDeleteBtnHide, isAuto, selectedNumbers }) => {
+const LottoItem = ({ id, isDeleteBtnHide, isAuto, selectedNumbers }) => {
   const { onRemove } = useContext(LottoDispatchContext);
 
   const handleRemove = () => {
@@ -36,7 +36,6 @@ const LottoItem = ({ id, idx, isDeleteBtnHide, isAuto, selectedNumbers }) => {
   return (
     <div className="LottoItem">
       <div className="tag">
-        <span>{idx}</span>
         <span>{isAuto ? "자동" : "수동"}</span>
       </div>
       <div className="content">

@@ -1,4 +1,10 @@
-import React, { useCallback, useMemo, useReducer, useRef } from "react";
+import React, {
+  useCallback,
+  useEffect,
+  useMemo,
+  useReducer,
+  useRef,
+} from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
 import LottoList from "./components/LottoList";
@@ -8,6 +14,10 @@ import Result from "./components/Result";
 const reducer = (state, action) => {
   let newState = [];
   switch (action.type) {
+    case "INIT": {
+      newState = action.data;
+      break;
+    }
     case "SUBMIT": {
       newState = [...state, action.data];
       break;
@@ -23,53 +33,29 @@ const reducer = (state, action) => {
     default:
       return state;
   }
+
+  localStorage.setItem("lottoItems", JSON.stringify(newState));
+
   return newState;
 };
-const findLastId = () => {
-  let storageData = window.localStorage.getItem('lottoItems')
-  if(storageData){
-    let listStorage = JSON.parse(storageData)
-    return listStorage[listStorage.length - 1].id + 1
-  }
-  return 0
-}
-const addLottoItemInLocalStorage = (item) => {
-  let storageData = window.localStorage.getItem('lottoItems')
-  if(storageData){
-    let listStorage = JSON.parse(storageData)
-    listStorage.push(item)
-    window.localStorage.setItem('lottoItems', JSON.stringify(listStorage))
-  }else{
-    window.localStorage.setItem('lottoItems', JSON.stringify([item]))
-  }
-}
-const removeLottoItemInLocalStorage = (selected) => {
-  const storageData = window.localStorage.getItem('lottoItems')
-  if(storageData){
-    const listStorage = JSON.parse(storageData).filter(item => {
-      return item.id !== selected
-    })
-
-    if(listStorage.length)
-      window.localStorage.setItem("lottoItems", JSON.stringify(listStorage))
-    else
-      window.localStorage.removeItem("lottoItems")
-
-  }
-}
-const getLottoItemInLocalStorage = () => {
-  const storageData = window.localStorage.getItem('lottoItems')
-  if(storageData)
-    return JSON.parse(storageData)
-  return []
-}
 
 export const LottoStateContext = React.createContext();
 export const LottoDispatchContext = React.createContext();
 
 const App = () => {
-  const [data, dispatch] = useReducer(reducer, getLottoItemInLocalStorage());
-  const dataId = useRef(findLastId());
+  const [data, dispatch] = useReducer(reducer, []);
+  const dataId = useRef(0);
+
+  useEffect(() => {
+    const storageData = localStorage.getItem("lottoItems");
+    if (storageData) {
+      const lottoList = JSON.parse(storageData);
+      if (lottoList.length >= 1) {
+        dataId.current = parseInt(lottoList[lottoList.length - 1].id) + 1;
+        dispatch({ type: "INIT", data: lottoList });
+      }
+    }
+  }, []);
 
   const onSubmit = useCallback((isAuto, selectedNumbers) => {
     dispatch({
@@ -78,7 +64,6 @@ const App = () => {
     });
 
     dataId.current += 1;
-    addLottoItemInLocalStorage({ isAuto, selectedNumbers, id: dataId.current })
   }, []);
 
   const onReset = useCallback(() => {
@@ -94,7 +79,6 @@ const App = () => {
       type: "REMOVE",
       selected,
     });
-    removeLottoItemInLocalStorage(selected + 1)
   }, []);
 
   const memoizedDispatches = useMemo(() => {
@@ -106,19 +90,25 @@ const App = () => {
       <LottoDispatchContext.Provider value={memoizedDispatches}>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={
-              <div className="App">
-                <Selector />
-                <LottoList />
-              </div>
-            } />
-            <Route path="result" element={
-              <div className="App">
-                <Result/>
-              </div>
-            }/>
+            <Route
+              path="/"
+              element={
+                <div className="App">
+                  <Selector />
+                  <LottoList />
+                </div>
+              }
+            />
+            <Route
+              path="result"
+              element={
+                <div className="App">
+                  <Result />
+                </div>
+              }
+            />
           </Routes>
-         </BrowserRouter>
+        </BrowserRouter>
       </LottoDispatchContext.Provider>
     </LottoStateContext.Provider>
   );
