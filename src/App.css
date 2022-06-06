@@ -211,26 +211,6 @@ body {
   margin: 0px 5px;
 }
 
-.LottoItem .content .quotient-zero {
-  background-color: #fce832;
-}
-
-.LottoItem .content .quotient-one {
-  background-color: #68c6f0;
-}
-
-.LottoItem .content .quotient-two {
-  background-color: #ff7272;
-}
-
-.LottoItem .content .quotient-three {
-  background-color: #a7a8a7;
-}
-
-.LottoItem .content .quotient-four {
-  background-color: #95c73a;
-}
-
 .LottoItem .content span {
   font-size: 22px;
   color: white;
@@ -243,7 +223,7 @@ body {
 }
 
 /* Result */
-.LottoResult {
+.Result {
   flex-grow: 1;
   height: 760px;
   padding: 10px 30px;
@@ -254,7 +234,7 @@ body {
   justify-content: space-between;
 }
 
-.LottoResult .header {
+.Result .header {
   background-color: #4292ed;
   display: flex;
   justify-content: center;
@@ -264,34 +244,76 @@ body {
   border-bottom: 1px solid #e2e2e2;
 }
 
-.LottoResult .header span {
+.Result .header span {
   font-size: 28px;
   font-weight: bold;
   color: #ececec;
 }
 
-.LottoResult .content {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  margin-top: 30px;
-}
-
-.LottoResult .content span {
-  font-size: 22px;
-  font-weight: bold;
-}
-
-.LottoResult .lotto_list {
-  margin-top: 30px;
-  flex-grow: 1;
+.Result .winning_number_wrapper {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  margin: 20px 0px;
 }
 
-.LottoResult .result_btn Button {
+.Result .winning_number_wrapper > span {
+  font-size: 26px;
+  padding: 15px 0px;
+}
+
+.Result .winning_number {
+  display: flex;
+}
+
+.Result .winning_number span {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+
+  font-size: 24px;
+  color: white;
+  text-shadow: 1px 2px 4px rgba(0, 0, 0, 0.3);
+
+  margin: 0px 5px;
+}
+
+.Result .lotto_list {
+  margin-top: 10px;
+  flex-grow: 1;
+}
+
+.Result .lotto_list .content {
+  padding: 0px 120px;
+}
+
+.Result .result_btn Button {
   width: 100%;
   padding: 25px 0px;
   font-size: 22px;
+}
+
+/* lottoColor */
+.quotient-zero {
+  background-color: #fce832;
+}
+
+.quotient-one {
+  background-color: #68c6f0;
+}
+
+.quotient-two {
+  background-color: #ff7272;
+}
+
+.quotient-three {
+  background-color: #a7a8a7;
+}
+
+.quotient-four {
+  background-color: #95c73a;
 }

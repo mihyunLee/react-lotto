@@ -25,7 +25,11 @@ const LottoList = () => {
       </div>
       <div className="result_btn">
         <Link to="/result">
-          <Button text={"결과보기"} type={"positive"} />
+          <Button
+            text={"결과보기"}
+            type={"positive"}
+            onClick={(event) => lottoList.length < 1 && event.preventDefault()}
+          />
         </Link>
       </div>
     </div>

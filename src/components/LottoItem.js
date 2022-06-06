@@ -2,35 +2,56 @@ import React, { useContext } from "react";
 import { LottoDispatchContext } from "../App";
 import Button from "./Button";
 
-const LottoItem = ({ id, isDeleteBtnHide, isAuto, selectedNumbers }) => {
+import { changeColor } from "../utils/lottoColor";
+
+const LottoItem = ({
+  id,
+  isDeleteBtnHide,
+  isAuto,
+  selectedNumbers,
+  winningNumber,
+}) => {
   const { onRemove } = useContext(LottoDispatchContext);
 
   const handleRemove = () => {
     onRemove(id);
   };
 
-  const handleChangeColor = (num) => {
-    let color = "";
-    switch (parseInt(num / 10)) {
+  const compareNumber = () => {
+    let count = 0;
+    let result = "";
+
+    for (let i of selectedNumbers) {
+      if (winningNumber.indexOf(i) !== -1) {
+        count += 1;
+      }
+    }
+
+    switch (count) {
       case 0:
-        color = "quotient-zero";
-        break;
       case 1:
-        color = "quotient-one";
+        result = "낙첨";
         break;
       case 2:
-        color = "quotient-two";
+        result = "5등";
         break;
       case 3:
-        color = "quotient-three";
+        result = "4등";
         break;
       case 4:
-        color = "quotient-four";
+        result = "3등";
+        break;
+      case 5:
+        result = "2등";
+        break;
+      case 6:
+        result = "1등";
         break;
       default:
-        color = "#e2e2e2";
+        result = "";
     }
-    return color;
+
+    return result;
   };
 
   return (
@@ -42,12 +63,16 @@ const LottoItem = ({ id, isDeleteBtnHide, isAuto, selectedNumbers }) => {
         {selectedNumbers
           .sort((a, b) => a - b)
           .map((num) => (
-            <div key={num} className={handleChangeColor(num)}>
+            <div key={num} className={changeColor(num)}>
               <span>{num}</span>
             </div>
           ))}
       </div>
-      {!isDeleteBtnHide && <Button text={"삭제"} onClick={handleRemove} />}
+      {isDeleteBtnHide ? (
+        <Button text={compareNumber()} />
+      ) : (
+        <Button text={"삭제"} onClick={handleRemove} />
+      )}
     </div>
   );
 };

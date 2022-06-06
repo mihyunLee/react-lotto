@@ -3,6 +3,8 @@ import { LottoDispatchContext, LottoStateContext } from "../App";
 import Button from "./Button";
 import SelectorItem from "./SelectorItem";
 
+import { makeRandomNumber } from "../utils/random";
+
 const list = [...Array(45).keys()].map((x) => ({ id: x + 1 }));
 
 const Selector = () => {
@@ -53,16 +55,7 @@ const Selector = () => {
   };
 
   const handleAuto = () => {
-    const randomNumArr = [];
-    for (let i = 0; i < 6; i++) {
-      let randomNum = Math.floor(Math.random() * 45 + 1);
-      if (randomNumArr.indexOf(randomNum) === -1) {
-        randomNumArr.push(randomNum);
-      } else {
-        i--;
-      }
-    }
-    handleSelect(randomNumArr, true);
+    handleSelect(makeRandomNumber(), true);
   };
 
   const handleSubmit = () => {
