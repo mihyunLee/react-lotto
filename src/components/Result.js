@@ -1,9 +1,10 @@
-import React, { useContext } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { LottoDispatchContext, LottoStateContext } from "../App";
 
 import Button from "./Button";
 import LottoItem from "./LottoItem";
+import Animation from "./Animation";
 
 import { makeRandomNumber } from "../utils/random";
 import { changeColor } from "../utils/lottoColor";
@@ -14,8 +15,20 @@ const Result = () => {
 
   const winningNumber = makeRandomNumber();
 
+  const [isAnimationOver, setIsAnimationOver] = useState(false);
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setIsAnimationOver(true);
+    }, 3000);
+    return () => {
+      clearTimeout(timer);
+    };
+  }, []);
+
   return (
     <div className="Result">
+      {!isAnimationOver && <Animation />}
       <div className="header">
         <span>구매복권 당첨결과</span>
       </div>

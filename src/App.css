@@ -225,7 +225,7 @@ body {
 /* Result */
 .Result {
   flex-grow: 1;
-  height: 760px;
+  height: 900px;
   padding: 10px 30px;
   margin: 0px 20px;
 
@@ -259,6 +259,7 @@ body {
 
 .Result .winning_number_wrapper > span {
   font-size: 26px;
+  font-weight: bold;
   padding: 15px 0px;
 }
 
@@ -295,6 +296,33 @@ body {
   width: 100%;
   padding: 25px 0px;
   font-size: 22px;
+}
+
+/* Animation */
+.Animation {
+  position: absolute;
+  z-index: 1;
+  width: 1152px;
+  height: 950px;
+  margin: 0 auto;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.Animation .container {
+  position: relative;
+  width: 300px;
+}
+
+.Animation > h1 {
+  font-size: 32px;
 }
 
 /* lottoColor */
