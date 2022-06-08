@@ -1,5 +1,5 @@
 import React, { useContext, useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { LottoDispatchContext, LottoStateContext } from "../App";
 
 import Button from "./Button";
@@ -15,6 +15,7 @@ const Result = () => {
 
   const winningNumber = makeRandomNumber();
 
+  const navigate = useNavigate();
   const [isAnimationOver, setIsAnimationOver] = useState(false);
 
   useEffect(() => {
@@ -55,9 +56,14 @@ const Result = () => {
         ))}
       </div>
       <div className="result_btn">
-        <Link to="/">
-          <Button text={"다시하기"} type={"positive"} onClick={onReset} />
-        </Link>
+        <Button
+          text={"다시하기"}
+          type={"positive"}
+          onClick={() => {
+            onReset();
+            navigate("/", { replace: true });
+          }}
+        />
       </div>
     </div>
   );

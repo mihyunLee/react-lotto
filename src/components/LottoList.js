@@ -1,12 +1,14 @@
 import { useContext } from "react";
 import { LottoDispatchContext, LottoStateContext } from "../App";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Button from "./Button";
 import LottoItem from "./LottoItem";
 
 const LottoList = () => {
   const lottoList = useContext(LottoStateContext);
   const { onReset } = useContext(LottoDispatchContext);
+
+  const navigate = useNavigate();
 
   return (
     <div className="LottoList">
@@ -24,13 +26,18 @@ const LottoList = () => {
         ))}
       </div>
       <div className="result_btn">
-        <Link to="/result">
-          <Button
-            text={"결과보기"}
-            type={"positive"}
-            onClick={(event) => lottoList.length < 1 && event.preventDefault()}
-          />
-        </Link>
+        <Button
+          text={"결과보기"}
+          type={"positive"}
+          onClick={(event) => {
+            if (lottoList.length < 1) {
+              event.preventDefault();
+              navigate("/", { replace: true });
+            } else {
+              navigate("/result");
+            }
+          }}
+        />
       </div>
     </div>
   );
