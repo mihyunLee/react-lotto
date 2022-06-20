@@ -225,9 +225,11 @@ body {
 /* Result */
 .Result {
   flex-grow: 1;
-  height: 900px;
+  height: 100%;
   padding: 10px 30px;
   margin: 0px 20px;
+
+  width: 100%;
 
   display: flex;
   flex-direction: column;
@@ -288,13 +290,10 @@ body {
   flex-grow: 1;
 }
 
-.Result .lotto_list .content {
-  padding: 0px 120px;
-}
-
 .Result .result_btn Button {
   width: 100%;
   padding: 25px 0px;
+  margin-bottom: 5px;
   font-size: 22px;
 }
 
@@ -302,8 +301,8 @@ body {
 .Animation {
   position: absolute;
   z-index: 1;
-  width: 1152px;
-  height: 950px;
+  width: 100%;
+  height: 100%;
   margin: 0 auto;
   top: 50%;
   left: 50%;

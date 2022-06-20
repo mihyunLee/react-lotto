@@ -7,6 +7,8 @@ import React, {
 } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import "./App.css";
+import "./mediaquery.css";
+
 import LottoList from "./components/LottoList";
 import Selector from "./components/Selector";
 import Result from "./components/Result";
