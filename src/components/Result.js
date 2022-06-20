@@ -27,6 +27,13 @@ const Result = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (lottoList.length < 1) {
+      alert("선택된 로또 번호가 없습니다.");
+      navigate("/", { replace: true });
+    }
+  }, [lottoList.length]);
+
   return (
     <div className="Result">
       {!isAnimationOver && <Animation />}

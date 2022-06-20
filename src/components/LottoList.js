@@ -32,7 +32,6 @@ const LottoList = () => {
           onClick={(event) => {
             if (lottoList.length < 1) {
               event.preventDefault();
-              navigate("/", { replace: true });
             } else {
               navigate("/result");
             }
